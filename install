@@ -1,0 +1,55 @@
+#!/usr/bin/env node
+
+"use strict";
+
+var fs = require("fs");
+var path = require("path");
+var format = require("util").format;
+
+var executingUser = process.env.USER;
+var home = process.env.HOME;
+
+var fileMap = {
+  // the key is the destination path and the value the original file
+  "/Users/%s/.fishrc": "fishrc",
+  "/Users/%s/Library/Fonts": "fonts",
+  "/Users/%s/.gitconfig": "gitconfig",
+  "/Users/%s/.vim": "vim",
+  "/Users/%s/.vimrc": "vimrc",
+  "/Users/%s/.eslintrc": "eslintrc"
+};
+
+Object.keys(fileMap).forEach(function (destination) {
+  var destinationPath = format(destination, executingUser);
+  //node cannot deal with ~ paths. Get the full destination path.
+  destinationPath = destinationPath.replace(/^~/, home);
+  if (fs.existsSync(destinationPath)) {
+      if (fs.lstatSync(destinationPath).isSymbolicLink()) {
+          fs.unlinkSync(destinationPath);
+      }
+  }
+  var source = path.join(__dirname, fileMap[destinationPath]);
+  fs.symlinkSync(source, destination);
+});
+
+/*# install rvm [ruby]
+\curl -sSL https://get.rvm.io | bash -s stable
+
+# install nvm [node.js]
+curl https://raw.githubusercontent.com/creationix/nvm/v0.23.3/install.sh | bash
+
+# installing the node environment
+nvm install 0.12
+nvm use 0.12 --default
+
+brew install caskroom/cask/brew-cask
+
+brew cask install google-chrome
+brew cask install iterm2
+brew cask install fish
+brew cask install spectacle
+brew cask install atom
+brew cask install quicklock
+brew cask install firefox
+brew cask install caffeine
+*/
