@@ -30,38 +30,37 @@ set scrolloff=1             " always keep a line above and below the cursor
 set incsearch               " highlight search term while typing
 set hlsearch                " Highlight search results
 set history=1000            " remember more old commands
+set noswapfile
+set nobackup
+set directory=~/.vim/.swp,/tmp
+set cursorline
+set foldenable
+set foldlevel=99
 " }}}
 " Plugins {{{
 call plug#begin('~/.vim/plugged')               " start plugin manager
+Plug 'flazz/vim-colorschemes'
 Plug 'miyakogi/conoline.vim'                    " Hightlights active line
 Plug 'kien/ctrlp.vim'                           " Fuzzy file searcher
 Plug 'rking/ag.vim'                             " Fast grep replacement
 Plug 'Raimondi/delimitMate'                     " Automatic bracker closing
 Plug 'editorconfig/editorconfig-vim'            " Settings based on .editorconfig file
-Plug 'tpope/vim-fugitive'                       " GIT integration
 Plug 'haya14busa/incsearch.vim'                 " Improved incremental searching
 Plug 'ervandew/supertab'                        " Tab completion
 Plug 'scrooloose/syntastic'                     " Syntax checking
-Plug 'godlygeek/tabular'                        " Table formatting
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }    " JS code analysis
-Plug 'tpope/vim-unimpaired'                     " Miscellaneous commands
-Plug 'tpope/vim-abolish'                        " Working with variants of a world
 Plug 'bling/vim-airline'                        " Hip status bar
 Plug 'tpope/vim-commentary'                     " (Un)commenting lines
 Plug 'Lokaltog/vim-easymotion'                  " Additional motions
-Plug 'ajh17/vim-fist'                           " Easy creation of Github gists
 Plug 'airblade/vim-gitgutter'                   " Column with line changes
 Plug 'bigfish/vim-js-context-coloring', { 'do': 'npm install' }     " Context coloring for javascript
 Plug 'pangloss/vim-javascript'                  " Better javascript support
 Plug 'leshill/vim-json'                         " Better JSON support
 Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' }  " Live markdown parsing
 Plug 'terryma/vim-multiple-cursors'             " Sublime-like multiple cursors
-Plug 'mustache/vim-mustache-handlebars'         " Better support for mustache and handlebars files.
 Plug 'moll/vim-node'                            " Better support for node modules
 Plug 'tpope/vim-repeat'                         " Use dot operator with plugins
 Plug 'tpope/vim-surround'                       " Commands to work with surroundings
 Plug 'tpope/vim-vinegar'                        " Directory overview in a panel
-Plug 'evanmiller/nginx-vim-syntax'              " Syntax highlighting for nginx files
 call plug#end()
 
 let g:js_context_colors_enabled=0
